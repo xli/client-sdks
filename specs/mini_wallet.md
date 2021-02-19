@@ -135,10 +135,10 @@ KYC data sample for clients to create accounts to do off-chain KYC data exchangi
 | `id`        | string! | Unique identifier of the event                                                                            |
 | `type`      | string! | Event type                                                                                                |
 | `data`      | string! | Event data should be interpreted based on the `type`. Could be plain text or JSON-encoded structure data. |
-| `timestamp` | uint    | Milliseconds since the unix epoch. The time event object is created by the system.                        |
+| `timestamp` | uint!   | Milliseconds since the unix epoch. The time event object is created by the system.                        |
 
 
-List of event options:
+Event types:
 
 | Event Type                   | Data Attribute Type   | Description                                                               |
 |------------------------------|-----------------------|---------------------------------------------------------------------------|
