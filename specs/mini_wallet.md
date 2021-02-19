@@ -46,8 +46,8 @@ Minimum Endpoints
 
 Offchain API Endpoint
 
-| Method | Path                   | Description                                                      |
-|--------|------------------------|------------------------------------------------------------------|
+| Method | Path                   | Description                    |
+|--------|------------------------|--------------------------------|
 | POST   | `/offchain/v2/command` | [Diem Off-chain API] endpoint. |
 
 
@@ -104,15 +104,14 @@ Payment URI is used for receiving payment from payers.
 
 Send payment moves funds from the account to payee's account.
 
-| Attribute                  | Type    | Description                                                                                              |
-|----------------------------|---------|----------------------------------------------------------------------------------------------------------|
-| `id`                       | string! | Id of this resource, maybe used in event data.                                                           |
-| `account_id`               | string  | Id of associated account resource                                                                        |
-| `currency`                 | string  | Diem currency code.                                                                                      |
-| `amount`                   | uint    | Amount of the transaction.                                                                               |
-| `payee`                    | string  | [Diem Account Identifier] or [Diem ID], the receiver of the payment.                                     |
-| `status`                   | string! | The result of sending payment: `failed` or `completed`.                                                  |
-| `diem_transaction_version` | uint?!  | Associated Diem transaction version. Set by server if there is diem transaction involved for the action. |
+| Attribute                  | Type    | Description                                                                               |
+|----------------------------|---------|-------------------------------------------------------------------------------------------|
+| `id`                       | string! | Id of this resource, maybe used in event data.                                            |
+| `account_id`               | string  | Id of associated account resource                                                         |
+| `currency`                 | string  | Diem currency code.                                                                       |
+| `amount`                   | uint    | Amount of the transaction.                                                                |
+| `payee`                    | string  | [Diem Account Identifier] or [Diem ID], the receiver of the payment.                      |
+| `status`                   | string! | The result of sending payment: `failed` or `completed`.                                   |
 
 
 #### Kyc Sample
@@ -140,15 +139,16 @@ KYC data sample for clients to create accounts to do off-chain KYC data exchangi
 
 Event types:
 
-| Event Type                   | Data Attribute Type   | Description                                                               |
-|------------------------------|-----------------------|---------------------------------------------------------------------------|
-| `log`                        | string                | Human readable message for whatever happened.                             |
-| `received-offchain-request`  | JSON                  | The off-chain API [CommandRequestObject] server received.                 |
-| `sent-offchain-request`      | JSON                  | The off-chain API [CommandRequestObject] server sends out.                |
-| `submitted-diem-transaction` | Hex-encoded BCS bytes | The diem signed transaction that is submitted .                           |
-| `send-payment-failed`        | JSON                  | `{"send_payment_id": string, "reason": string}`                           |
-| `created-account-subaddress` | JSON                  | `{"account_id": string, "subaddress_hex": string, "payment_uri": string}` |
-| `receive-payment-failed`     | JSON                  | `{"account_id": string, "diem_transaction_version": uint}`                |
+| Event Type                   | Data Attribute Type   | Description                                                                                       |
+|------------------------------|-----------------------|---------------------------------------------------------------------------------------------------|
+| `log`                        | string                | Human readable message for whatever happened.                                                     |
+| `received-offchain-request`  | JSON                  | The off-chain [CommandRequestObject] server received.                                             |
+| `sent-offchain-request`      | JSON                  | The off-chain [CommandRequestObject] server sent out.                                             |
+| `submitted-diem-transaction` | Hex-encoded BCS bytes | The diem signed transaction that is submitted .                                                   |
+| `diem-transaction-failure`   | JSON                  | `{"send_payment_id": string, "diem_transaction_version": uint, "diem_transaction_hash": string }` |
+| `diem-transaction-success`   | JSON                  | `{"send_payment_id": string, "diem_transaction_version": uint, "diem_transaction_hash": string }` |
+| `created-account-subaddress` | JSON                  | `{"account_id": string, "subaddress_hex": string}`                                                |
+| `receive-payment-failed`     | JSON                  | `{"account_id": string, "diem_transaction_version": uint}`                                        |
 
 
 [KycSample]: #kyc-sample
