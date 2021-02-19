@@ -93,13 +93,11 @@ Account holds KYC data, and all other resources are scoped by account id.
 Payment URI is used for receiving payment from payers.
 
 
-| Attribute     | Type    | Description                                  |
-|---------------|---------|----------------------------------------------|
-| `id`          | string! | Id this resource, may be used in event data. |
-| `account_id`  | string  | Id of Account resource                       |
-| `currency`    | string? | Currency code of the payment.                |
-| `amount`      | string? | Amount of the payment.                       |
-| `payment_uri` | string! | [Payment URI] for receiving the payment.     |
+| Attribute     | Type    | Description                              |
+|---------------|---------|------------------------------------------|
+| `currency`    | string? | Currency code of the payment.            |
+| `amount`      | string? | Amount of the payment.                   |
+| `payment_uri` | string! | [Payment URI] for receiving the payment. |
 
 
 #### Send Payment
@@ -132,25 +130,25 @@ KYC data sample for clients to create accounts to do off-chain KYC data exchangi
 #### Event
 
 
-| Attribute   | Type    | Description                                                                                                  |
-|-------------|---------|--------------------------------------------------------------------------------------------------------------|
-| `id`        | string! | Unique identifier of the event                                                                               |
-| `type`      | string! | Event type                                                                                                   |
-| `data`      | string! | Event data should be interpretered basing on the `type`. Could be plain text or JSON-encoded structure data. |
-| `timestamp` | uint    | Milliseconds since unix epoch. The time event object is created by the system.                               |
+| Attribute   | Type    | Description                                                                                               |
+|-------------|---------|-----------------------------------------------------------------------------------------------------------|
+| `id`        | string! | Unique identifier of the event                                                                            |
+| `type`      | string! | Event type                                                                                                |
+| `data`      | string! | Event data should be interpreted based on the `type`. Could be plain text or JSON-encoded structure data. |
+| `timestamp` | uint    | Milliseconds since the unix epoch. The time event object is created by the system.                        |
 
 
 List of event options:
 
-| Event Type                   | Data Type             | Description                                                |
-|------------------------------|-----------------------|------------------------------------------------------------|
-| `message`                    | string                | Human readable message for whatever happened.              |
-| `offchain-inbound-request`   | JSON                  | The off-chain API [CommandRequestObject] server received.  |
-| `offchain-outbound-request`  | JSON                  | The off-chain API [CommandRequestObject] server sends out. |
-| `submit-diem-transaction`    | Hex-encoded BCS bytes | The diem signed transaction that is submitted .            |
-| `send-payment-failed-reason` | JSON                  | `{"send_payment_id": string, "reason": string}`            |
-| `created-account-subaddress` | JSON                  | `{"account_id": string, "subaddress_hex": string}`         |
-| `receive-payment-failed`     | JSON                  | `{"account_id": string, "diem_transaction_version": uint}` |
+| Event Type                   | Data Attribute Type   | Description                                                               |
+|------------------------------|-----------------------|---------------------------------------------------------------------------|
+| `log`                        | string                | Human readable message for whatever happened.                             |
+| `received-offchain-request`  | JSON                  | The off-chain API [CommandRequestObject] server received.                 |
+| `sent-offchain-request`      | JSON                  | The off-chain API [CommandRequestObject] server sends out.                |
+| `submitted-diem-transaction` | Hex-encoded BCS bytes | The diem signed transaction that is submitted .                           |
+| `send-payment-failed`        | JSON                  | `{"send_payment_id": string, "reason": string}`                           |
+| `created-account-subaddress` | JSON                  | `{"account_id": string, "subaddress_hex": string, "payment_uri": string}` |
+| `receive-payment-failed`     | JSON                  | `{"account_id": string, "diem_transaction_version": uint}`                |
 
 
 [KycSample]: #kyc-sample
