@@ -36,12 +36,12 @@ We value simplicity in favor of performance in MiniWallet API design. Providing 
 
 Minimum Endpoints
 
-| Method | Path                                 | Description                                                                         |
-|--------|--------------------------------------|-------------------------------------------------------------------------------------|
-| POST   | `/accounts`                          | Create a new account with KYC data.                                                 |
-| GET    | `/accounts/:account_id`              | Returns account resource. All executed diem transactions result should be included. |
-| POST   | `/accounts/:account_id/payment_uri`  | Returns a [Payment URI] for receiving payment.                                      |
-| POST   | `/accounts/:account_id/send_payment` | Send a payment to a payee account.                                                  |
+| Method | Path                                 | Description                                                                          |
+|--------|--------------------------------------|--------------------------------------------------------------------------------------|
+| POST   | `/accounts`                          | Create a new account with KYC data.                                                  |
+| GET    | `/accounts/:account_id`              | Returns account resource. All executed diem transactions results should be included. |
+| POST   | `/accounts/:account_id/payment_uri`  | Returns a [Payment URI] for receiving payment.                                       |
+| POST   | `/accounts/:account_id/send_payment` | Send a payment to a payee account.                                                   |
 
 
 Offchain API Endpoint
@@ -102,7 +102,7 @@ Payment URI is used for receiving payment from payers.
 
 #### Send Payment
 
-Send payment moves funds from the account to payee's account.
+Send payment moves funds from the account to the payee's account.
 
 | Attribute                  | Type    | Description                                                                               |
 |----------------------------|---------|-------------------------------------------------------------------------------------------|
@@ -127,6 +127,8 @@ KYC data sample for clients to create accounts to do off-chain KYC data exchangi
 
 
 #### Event
+
+Event is optional to implement, it is a log of what happened in the system.
 
 
 | Attribute   | Type    | Description                                                                                               |
